@@ -1,0 +1,76 @@
+						<!-- edit multi-lang post -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">{edit}</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                    <div id="rootwizard">
+                                        <div class="navbar">
+                                          <div class="navbar-inner">
+                                            <div class="container">
+                                        <ul>
+                                            <li><a href="#code-{code}" data-toggle="tab">{code}</a></li>
+                                            {codes_loop}
+                                        </ul>
+                                         </div>
+                                          </div>
+                                        </div>
+                                        <div class="tab-content">
+                                            <div class="tab-pane" id="code-{code}">
+                                               <!-- tab -->
+					                            <div class="block-content collapse in">
+					                                <div class="row-fluid padd-bottom">
+					                                <!--  content -->
+					                                <div class="span12">
+					                                    <form class="form-horizontal" method="POST" action="./admin/edit_delete_post/mod-blog">
+			                    							<div class="row-fluid">
+										                        <div class="block-content collapse in">
+								                                    <input type="text" class="span6" placeholder="{lbl_title}" id="typeahead"  data-provide="typeahead" value="{title}" name="title">
+								                                </div>
+										                        <div class="block-content collapse in">
+										                            <textarea placeholder="{lbl_message}" class="summernote" name="content">{message}</textarea>
+																</div>
+															</div>
+					                                        <div class="block-content collapse in">
+					                                          <input type="hidden" name="delete_post[]" value="{id}" />
+					                                          <input type="hidden" name="id" value="{id}">
+					                                          <button type="reset" class="btn"><i class="icon-repeat"></i> {btn_reset}</button>
+					                                          <button type="submit" class="btn btn-primary" name="submit"><i class="icon-pencil icon-white"></i> {btn_edit}</button>
+					                                          <button type="submit" class="btn btn-danger" name="submit_delete"><i class="icon-remove icon-white"></i> {btn_delete}</button>
+					                                        </div>
+					                                    </form>
+					                                </div>
+					                                <!--  /tab -->
+					                                </div>
+					                        </div>
+					                        <!-- /edit multi-lang post -->
+                                            </div>
+                                            
+                                            {content}
+                                            
+                                            <ul class="pager wizard">
+                                                <li class="previous first" style="display:none;"><a href="javascript:void(0);">First</a></li>
+                                                <li class="previous"><a href="javascript:void(0);">Previous</a></li>
+                                                <li class="next last" style="display:none;"><a href="javascript:void(0);">Last</a></li>
+                                                <li class="next"><a href="javascript:void(0);">Next</a></li>
+                                                <li class="next finish" style="display:none;"><a href="javascript:;">Finish</a></li>
+                                            </ul>
+                                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /edit multi-lang post -->
+                        
+					    <!-- summernote javascript -->
+                        <script type="text/javascript">
+						$(document).ready(function() {
+						  $('.summernote').summernote({height: 350, codemirror: {
+						    theme: ''}
+						  });
+						});
+						var postForm = function() {
+						  var content = $('textarea[name="content"]').html($('.summernote').code());
+						}
+						</script>

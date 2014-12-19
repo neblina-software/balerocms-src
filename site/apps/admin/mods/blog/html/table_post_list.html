@@ -1,0 +1,25 @@
+                        <!-- block -->
+                         <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">{edit}</div>
+                            </div>
+                            {pagination_bar}
+                            <div class="block-content collapse in">
+								<form method="POST" action="./admin/edit_delete_post/mod-blog">
+								<table class="table table-striped">
+								  <tr>
+								    <th scope="col">#</th>
+								    <th scope="col">Post</th>
+								    <th scope="col">Content</th>
+								    <th scope="col">Action</th>
+								    <th scope="col">Select</th>
+								  </tr>
+								  <!-- td_loop.html -->
+								  {loop}
+								  </table>
+								<!-- <input type="submit" name="submit" value="Delete!" class="btn btn-primary"> -->
+								<button type="submit" name="submit_delete" class="btn btn-danger"><i class="icon-remove icon-white"></i> Delete</button>
+								</form>
+                            </div>
+                        </div>
+                        <!-- /block -->

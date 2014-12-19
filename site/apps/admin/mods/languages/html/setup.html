@@ -1,0 +1,29 @@
+                        <!-- setup lang -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">{list}</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="row-fluid padd-bottom">
+                                <!--  content -->
+                                <div class="span12">
+                                    <form class="form-horizontal" method="POST" action="./admin/setup/mod-languages">
+                                      <fieldset>
+                                        <legend>{lbl_list}</legend>
+                                        <div class="control-group">
+                                          <label class="control-label" for="select01">{lbl_avaible}</label>
+                                          <div class="controls">
+                                            {dropdown_languages}
+                                          </div>
+                                        </div>
+                                        <div class="form-actions">
+                                          <button type="submit" class="btn btn-danger" name="delete_language"><i class="icon-remove icon-white"></i> {btn_delete}</button>
+                                        </div>
+                                      </fieldset>
+                                    </form>
+                                </div>
+                                <!--  /content -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /setup lang -->

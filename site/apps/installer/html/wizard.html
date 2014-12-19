@@ -1,0 +1,170 @@
+					<!-- wizard -->
+                    <div class="row-fluid section">
+                         <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">Setup Wizard</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                    <div id="rootwizard">
+                                        <div class="navbar">
+                                          <div class="navbar-inner">
+                                            <div class="container">
+                                        <ul>
+                                            <li><a href="#tab1" data-toggle="tab">{check_db} {lbl_dbconfig}</a></li>
+                                            <li><a href="#tab2" data-toggle="tab">{check_site} {lbl_siteinfo}</a></li>
+                                            <li><a href="#tab3" data-toggle="tab">{check_admin} {lbl_adminconfig}</a></li>
+                                        </ul>
+                                         </div>
+                                          </div>
+                                        </div>
+                                        <div id="bar" class="progress progress-striped active">
+                                          <div class="bar"></div>
+                                        </div>
+                                        <div class="tab-content">
+                                            <div class="tab-pane" id="tab1">
+                                               <form class="form-horizontal" method="POST" action="index.php?app=installer&sr=formDBInfo">
+                                                  <fieldset>
+                                                    <div class="control-group">
+                                                      <label class="control-label" for="focusedInput">{lbl_dbhost}</label>
+                                                      <div class="controls">
+                                                        <input name="dbhost" class="input-xlarge focused" id="focusedInput" type="text" value="{txt_dbhost}">
+                                                      </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                      <label class="control-label" for="focusedInput">{lbl_dbusername}</label>
+                                                      <div class="controls">
+                                                        <input name="dbuser" class="input-xlarge focused" id="focusedInput" type="text" value="{txt_dbuser}">
+                                                      </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                      <label class="control-label" for="focusedInput">{lbl_dbpass}</label>
+                                                      <div class="controls">
+                                                        <input name="dbpass" class="input-xlarge focused" id="focusedInput" type="password" value="{txt_dbpass}">
+                                                      </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                      <label class="control-label" for="focusedInput">{lbl_dbname}</label>
+                                                      <div class="controls">
+                                                        <input name="dbname" class="input-xlarge focused" id="focusedInput" type="text" value="{txt_dbname}">
+                                                        <p class="help-block">{lbl_dbname_note}</p>
+                                                      </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                      <div class="controls">
+                                                        <button type="submit" name="submit" class="btn btn-primary">{btn_save}</button>
+                                                      </div>
+                                                    </div>
+                                                  </fieldset>
+                                                </form>
+                                            </div>
+                                            <div class="tab-pane" id="tab2">
+                                                <form class="form-horizontal" method="POST" action="index.php?app=installer&sr=formSiteInfo">
+                                                  <fieldset>
+                                                    <div class="control-group">
+                                                      <label class="control-label" for="focusedInput">{lbl_basepath}</label>
+                                                      <div class="controls">
+                                                        <input name=basepath"" class="input-xlarge focused" id="focusedInput" type="text" value="{txt_basepath}">
+                                                        <p class="help-block">{lbl_basepath_note}</p>
+                                                      </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                      <label class="control-label" for="focusedInput">{lbl_title}</label>
+                                                      <div class="controls">
+                                                        <input name="title" class="input-xlarge focused" id="focusedInput" type="text" value="{txt_title}">
+                                                      </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                      <label class="control-label" for="focusedInput">{lbl_url}</label>
+                                                      <div class="controls">
+                                                        <input name="url" class="input-xlarge focused" placeholder="http://" id="focusedInput" type="text" value="{txt_url}">
+                                                      </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                      <label class="control-label" for="focusedInput">{lbl_keywords}</label>
+                                                      <div class="controls">
+                                                        <input name="keywords" class="input-xlarge focused" id="focusedInput" type="text" value="{txt_keywords}">
+                                                      </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                      <label class="control-label" for="focusedInput">{lbl_description}</label>
+                                                      <div class="controls">
+                                                        <textarea name="description" class="input-xlarge" style="width: 810px; height: 200px">{txt_description}</textarea>
+                                                      </div>
+                                                    </div>
+                                                   <div class="control-group">
+                                                      <div class="controls">
+                                                        <button type="submit" name="submit" class="btn btn-primary">{btn_save}</button>
+                                                      </div>
+                                                    </div>
+                                                  </fieldset>
+                                                </form>
+                                            </div>
+                                            <div class="tab-pane" id="tab3">
+                                                <form class="form-horizontal" method="POST" action="index.php?app=installer&sr=formadminInfo">
+                                                  <fieldset>
+                                                    <div class="control-group">
+                                                      <label class="control-label" for="focusedInput">{lbl_administrator}</label>
+                                                      <div class="controls">
+                                                        <input name="username" class="input-xlarge focused" id="focusedInput" type="text" value="{txt_administrator}">
+                                                      </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                      <label class="control-label" for="focusedInput">{lbl_pass}</label>
+                                                      <div class="controls">
+                                                        <input name="passwd" class="input-xlarge focused" id="focusedInput" type="password" value="">
+                                                      </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                      <label class="control-label" for="focusedInput">{lbl_retype}</label>
+                                                      <div class="controls">
+                                                        <input name="passwd2" class="input-xlarge focused" id="focusedInput" type="password" value="">
+                                                      </div>
+                                                    </div>
+                                                    <div class="control-group">
+                                                      <label class="control-label" for="focusedInput">{lbl_firstname}</label>
+                                                      <div class="controls">
+                                                        <input name="firstname" class="input-xlarge focused" id="focusedInput" type="text" value="{txt_firstname}">
+                                                      </div>
+                                                    </div>
+                                                   <div class="control-group">
+                                                      <label class="control-label" for="focusedInput">{lbl_lastname}</label>
+                                                      <div class="controls">
+                                                        <input name="lastname" class="input-xlarge focused" id="focusedInput" type="text" value="{txt_lastname}">
+                                                      </div>
+                                                    </div>
+                                                   <div class="control-group">
+                                                      <label class="control-label" for="focusedInput">{lbl_email}</label>
+                                                      <div class="controls">
+                                                        <input name="email" class="input-xlarge focused" id="focusedInput" type="text" value="{txt_email}">
+                                                      </div>
+                                                   </div>
+                                                   <div class="control-group">
+                                                   	  <label class="control-label" for="focusedInput"><input type="checkbox" name="newsletter" value="yes" checked></label>
+                                                      <div class="controls">
+                                                      	<label class="control-label" for="focusedInput">{lbl_newsletter}</label>
+                                                      </div>
+                                                   </div>
+                                                   <div class="control-group">
+                                                      <div class="controls">
+                                                        <button type="submit" name="submit" class="btn btn-primary">{btn_save}</button>
+                                                      </div>
+                                                    </div>
+                                                  </fieldset>
+                                                </form>
+                                            </div>
+                                            <ul class="pager wizard">
+                                                <li class="previous first" style="display:none;"><a href="javascript:void(0);">First</a></li>
+                                                <li class="previous"><a href="javascript:void(0);">Previous</a></li>
+                                                <li class="next last" style="display:none;"><a href="javascript:void(0);">Last</a></li>
+                                                <li class="next"><a href="javascript:void(0);">Next</a></li>
+                                                <li class="next finish" style="display:none;"><a href="javascript:;">Finish</a></li>
+                                            </ul>
+                                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->
+                    </div>

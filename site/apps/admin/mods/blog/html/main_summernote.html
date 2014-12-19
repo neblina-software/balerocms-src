@@ -1,0 +1,42 @@
+						<!-- new post -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">{title}</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="row-fluid padd-bottom">
+	                                <!--  content -->
+			                        <div class="span12" id="content">
+			                          	<form class="form-horizontal" method="POST" action="./admin/main/mod-blog">
+					                    <div class="row-fluid">
+					                        <div class="block-content collapse in">
+			                                    <input type="text" class="span6" placeholder="{lbl_title}" id="typeahead"  data-provide="typeahead" value="" name="title">
+			                                </div>
+					                        <div class="block-content collapse in">
+					                            <textarea placeholder="{lbl_message}" class="summernote" name="content"></textarea>
+					                            <div class="limit"></div>
+											</div>
+					                        <div class="block-content collapse in">
+			                                    <input type="submit" class="btn btn-primary" value="{btn_add}" name="submit">
+			                                    <input type="reset" class="btn" value="{btn_cancel}" name="cancel">
+			                                </div>
+					                        </div>
+					                   	</form>
+					                 </div>
+	                                <!--  /content -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /new post -->
+
+						<!-- summernote javascript -->
+                        <script type="text/javascript">
+							$(document).ready(function() {
+							  $('.summernote').summernote({height: 300, codemirror: {
+							    theme: ''}
+							  });
+							});
+							var postForm = function() {
+							  var content = $('textarea[name="content"]').html($('#summernote').code());
+							}
+						</script>

@@ -1,0 +1,74 @@
+                        <!-- block -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">{title}</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="row-fluid padd-bottom">
+                                <!--  content -->
+                                <div class="span12">
+                                    <form class="form-horizontal" method="POST" action="./admin">
+                                      <fieldset>
+                                        <legend>{lbl_settings}</legend>
+                                        <div class="control-group">
+                                          <label class="control-label" for="typeahead">{lbl_theme}</label>
+                                          <div class="controls">
+                                            <!--
+                                            <input type="text" class="span6" id="typeahead"  data-provide="typeahead" data-items="4" data-source='["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]'>
+											-->
+											{dropdown_theme}
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label" for="date01">{lbl_pagination}</label>
+                                          <div class="controls">
+                                            {dropdown_pagination}
+                                          </div>
+                                        </div>
+                                         <div class="control-group">
+                                          <label class="control-label" for="typeahead">{lbl_editor}</label>
+                                          <div class="controls">
+											{editors}
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label" for="select01">{lbl_title}</label>
+                                          <div class="controls">
+                                             <input type="text" class="span6" id="typeahead"  data-provide="typeahead" value="{txt_title}" name="title">
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label" for="select01">{lbl_url}</label>
+                                          <div class="controls">
+                                             <input type="text" class="span6" id="typeahead"  data-provide="typeahead" value="{txt_url}" name="url">
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label" for="multiSelect">{lbl_keywords}</label>
+                                          <div class="controls">
+                                          <!--
+                                            <select multiple="multiple" id="multiSelect" class="chzn-select span4" name="keywords">
+                                              <option>Blog</option><option>Software</option><option>Tech</option><option>Social</option><option>Media</option><option>Video</option><option>Hacking</option><option>News</option><option>E-Commerce</option><option>Development</option><option>Portal</option><option>Services</option><option>Programming</option><option>Books</option><option>Articles</option><option>Magazine</option><option>Web</option><option>Solutions</option><option>Other</option>
+                                            </select>
+                                          -->
+                                            <input type="text" class="span6" value="{txt_keywords}" name="keywords">
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label" for="textarea2">{lbl_description}</label>
+                                          <div class="controls">
+                                            <textarea class="input-xlarge" placeholder="{lbl_insert}" style="width: 710px; height: 200px" name="description">{txt_description}</textarea>
+                                          </div>
+                                        </div>
+                                        <div class="form-actions">
+                                          <input type="submit" class="btn btn-primary" value="Save changes" name="submit">
+                                          <input type="reset" class="btn" value="Cancel" name="cancel">
+                                        </div>
+                                      </fieldset>
+                                    </form>
+                                </div>
+                                <!--  /content -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /block -->

@@ -1,0 +1,35 @@
+                                            <div class="tab-pane" id="code-{code}">
+                                               <!-- edit post -->
+					                            <div class="block-content collapse in">
+					                                <div class="row-fluid padd-bottom">
+					                                <div class="span12">
+					                                    <form class="form-horizontal" method="POST" action="./admin/post_multilang/mod-blog">
+					                                      <fieldset>
+					                                        <div class="control-group">
+					                                          <label class="control-label" for="select01">{lbl_title}</label>
+					                                          <div class="controls">
+					                                             <input type="text" class="span6" id="typeahead"  data-provide="typeahead" value="{title}" name="title">
+					                                          </div>
+					                                        </div>
+					                                        <div class="control-group">
+					                                          <label class="control-label" for="textarea2">{lbl_message}</label>
+					                                          <div class="controls">
+					                                            <textarea class="input-xlarge" style="width: 710px; height: 200px" name="content">{message}</textarea>
+					                                          </div>
+					                                        </div>
+					                                        <div class="form-actions">
+					                                     	  <input type="hidden" name="code" value="{code}" />
+					                                          <input type="hidden" name="delete_post[]" value="{id}" />
+					                                          <input type="hidden" name="id" value="{id}">
+					                                          <button type="reset" class="btn"><i class="icon-repeat"></i> {btn_reset}</button>
+					                                          <button type="submit" class="btn btn-primary" name="submit"><i class="icon-pencil icon-white"></i> {btn_edit}</button>
+					                                          <button type="submit" class="btn btn-danger" name="submit_delete"><i class="icon-remove icon-white"></i> {btn_delete}</button>
+					                                        </div>
+					                                      </fieldset>
+					                                    </form>
+					                                </div>
+					                                </div>
+					                        	</div>
+					                        </div>
+					                        <!-- /edit post -->
+                                           

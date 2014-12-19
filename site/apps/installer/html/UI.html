@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<title>Installing...</title>
+        <link rel="shortcut icon" href="{basepath}favicon.ico">
+        <script type="text/javascript" src="{basepath}site/apps/installer/html/js/jquery.js"></script>
+        <script type="text/javascript" src="{basepath}site/apps/installer/html/js/progressbar.js"></script>
+        <link rel="stylesheet" type="text/css" href="{basepath}site/apps/installer/html/skins/tiny-blue/progressbar.css">
+</head>
+<body>
+
+<div class="cloud">
+</div>
+<div id="progressBar" class="tiny-blue">
+	<div></div>
+</div>
+<div class="message">
+	Mounting System...
+</div>
+        <script>
+                progressBar(100, $('#progressBar'));
+        </script>
+   <script type="text/javascript">
+                   var pagina = "index.php";
+                   function redireccionar() {
+                           location.href=pagina;
+                           //var url = 'index.php';
+                           //window.open(url , 'balero');
+                   }
+                   setTimeout ("redireccionar()", 30000);
+   </script>
+</body>
+</html>

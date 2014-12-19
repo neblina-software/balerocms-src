@@ -1,0 +1,38 @@
+                        <!-- new post -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">{title}</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="row-fluid padd-bottom">
+                                <!--  content -->
+                                <div class="span12">
+                                    <form class="form-horizontal" method="POST" action="./admin/main/mod-blog">
+                                      <fieldset>
+                                        <legend>{lbl_new_post}</legend>
+                                        <div class="control-group">
+                                          <label class="control-label" for="select01">{lbl_title}</label>
+                                          <div class="controls">
+                                             <input type="text" class="span6" id="typeahead"  data-provide="typeahead" value="" name="title">
+                                          </div>
+                                        </div>
+                                        <div class="control-group">
+                                          <label class="control-label" for="textarea2">{lbl_message}</label>
+                                          <div class="controls">
+                                            <textarea class="input-xlarge textarea" style="width: 710px; height: 200px" name="content"></textarea>
+                                          </div>
+                                        </div>
+                                        <div class="form-actions">
+                                          <input type="submit" class="btn btn-primary" value="{btn_add}" name="submit">
+                                          <input type="reset" class="btn" value="{btn_cancel}" name="cancel">
+                                        </div>
+                                      </fieldset>
+                                    </form>
+                                </div>
+                                <!--  /content -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /new post -->
+
+ 

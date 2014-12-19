@@ -1,0 +1,28 @@
+                                            <div class="tab-pane" id="code-{code}">
+                                               <!-- edit post -->
+					                            <div class="block-content collapse in">
+					                                <div class="row-fluid padd-bottom">
+					                                <div class="span12">
+					                                    <form class="form-horizontal" method="POST" action="./admin/post_multilang/mod-blog">
+			                    							<div class="row-fluid">
+										                        <div class="block-content collapse in">
+								                                    <input type="text" class="span6" placeholder="{lbl_title}" id="typeahead"  data-provide="typeahead" value="{title}" name="title">
+								                                </div>
+										                        <div class="block-content collapse in">
+										                            <textarea placeholder="{lbl_message}" class="summernote" name="content">{message}</textarea>
+																</div>
+															</div>
+					                                        <div class="block-content collapse in">
+					                                    	  <input type="hidden" name="code" value="{code}" />
+					                                          <input type="hidden" name="delete_post[]" value="{id}" />
+					                                          <input type="hidden" name="id" value="{id}">
+					                                          <button type="reset" class="btn"><i class="icon-repeat"></i> {btn_reset}</button>
+					                                          <button type="submit" class="btn btn-primary" name="submit"><i class="icon-pencil icon-white"></i> {btn_edit}</button>
+					                                          <button type="submit" class="btn btn-danger" name="submit_delete"><i class="icon-remove icon-white"></i> {btn_delete}</button>
+					                                        </div>
+					                                    </form>
+					                                </div>
+					                                </div>
+					                        	</div>
+					                        </div>
+					                        <!-- /edit post -->

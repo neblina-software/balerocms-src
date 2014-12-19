@@ -1,0 +1,29 @@
+                        <!-- main setup lang -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">{title}</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="row-fluid padd-bottom">
+                                <!--  content -->
+                                <div class="span12">
+                                    <form class="form-horizontal" method="POST" action="./admin/setup/mod-languages">
+                                      <fieldset>
+                                        <legend>{lbl_configuration}</legend>
+                                        <div class="control-group">
+                                          <div class="pull-left">
+                                          	 <!-- Dynamic DropDown Menu -->
+                                             {content}
+                                          </div>
+                                        </div>
+                                        <div class="pull-left">
+                                          <button type="submit" class="btn btn-inverse" name="activate"><i class="icon-refresh icon-white"></i> {btn_save}</button>
+                                        </div>
+                                      </fieldset>
+                                    </form>
+                                </div>
+                                <!--  /content -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /main setup lang -->

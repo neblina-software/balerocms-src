@@ -1,0 +1,48 @@
+						<!-- new multi-lang page -->
+                        <div class="block">
+                            <div class="navbar navbar-inner block-header">
+                                <div class="muted pull-left">{new_page}</div>
+                            </div>
+                            <div class="block-content collapse in">
+                                <div class="span12">
+                                               <!-- edit page -->
+					                            <div class="block-content collapse in">
+					                                <div class="row-fluid padd-bottom">
+					                                <!--  content -->
+					                                <div class="span12">
+					                                    <form class="form-horizontal" method="POST" action="./admin/new_page/mod-virtual_page">
+					                                      <fieldset>
+					                                        <div class="control-group">
+					                                          <label class="control-label" for="select01">{lbl_title}</label>
+					                                          <div class="controls">
+					                                             <input type="text" class="span6" id="typeahead"  data-provide="typeahead" name="virtual_title">
+					                                          </div>
+					                                        </div>
+					                                        <div class="control-group">
+					                                          <label class="control-label" for="select01">{lbl_active}</label>
+					                                          <div class="controls">
+					                                             <div class="field"><input type="radio" name="a" value="1" checked="checked"> {enabled}</div>
+																 <div class="label"></div>
+																 <div class="field"><input type="radio" name="a" value="0"> {disabled}</div>
+					                                          </div>
+					                                        </div>
+					                                        <div class="control-group">
+					                                          <label class="control-label" for="textarea2">{lbl_message}</label>
+					                                          <div class="controls">
+					                                            <textarea class="input-xlarge textarea" style="width: 710px; height: 200px" name="content"></textarea>
+					                                          </div>
+					                                        </div>
+					                                        <div class="form-actions">
+					                                          <button type="submit" class="btn btn-primary" name="submit"><i class="icon-ok"></i> {btn_add}</button>
+					                                        </div>
+					                                      </fieldset>
+														</form>
+					                                </div>
+					                                <!--  /content -->
+					                                </div>
+					                        </div>
+					                        <!-- /edit page -->
+                                            </div>
+                                        </div>  
+                                    </div>
+                        <!-- /edit multi-lang page -->
