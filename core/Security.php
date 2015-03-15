@@ -10,13 +10,27 @@
  * PHP P.O.O. (M.V.C.)
  * Contacto: anibalgomez@icloud.com
  *
+ * 13-03-2015 Multiple Authenticated Blind SQL Injections
+ * Reported By Gjoko Krstic <gjoko@zeroscience.mk>
+ * Fixed by Anibal Gomez <anibalgomez@icloud.com>
+ *
+ *
 **/
 
 class Security {
 	
 	private $var;
 
-	
+    /**
+     * Security Fix
+     * @param $nvar
+     * @return int
+     */
+    public function toInt($nvar) {
+        $nvar = preg_replace('/[^0-9,.]+/i', '', $nvar);
+        return (int) $nvar;
+    }
+
 	/**
 	 * 
 	 * We need HTML tags like '<' or '>'

@@ -10,7 +10,7 @@
  * PHP P.O.O. (M.V.C.)
  * Contacto: anibalgomez@icloud.com
  * 
- * UPDATED: 20-04-2014
+ * Security Fix: 15-03-2015
  *
 **/
 
@@ -18,10 +18,14 @@ class mod_virtual_page_Controller {
 	
 	public $modModel;
 	public $modView;
+
+    private $id;
+    private $objSecurity;
 	
 	public function __construct($menu) {
-		
-		
+
+        $this->objSecurity = new Security();
+
 		// cargar vista de módulo.
 		try {
 			
@@ -142,10 +146,9 @@ class mod_virtual_page_Controller {
 			if(!isset($_GET['id'])) {
 				throw new Exception(_ID_DONT_EXIST);
 			}
-			
-			$id = new Security();
-			$_id = $id->shield($_GET['id']);
-			
+
+			$this->id = $this->objSecurity->toInt($_GET['id']);
+
 			if(isset($_POST['submit'])) {
 				
 				if(empty($_POST['content'])) {
@@ -155,16 +158,21 @@ class mod_virtual_page_Controller {
 					throw new Exception(_PAGE_POST_EMPTY_TITLE);
 				}
 				
-				$this->modModel->update_virtual_content($_POST['id'], $id->shield($_POST['virtual_title']), $id->noJS($_POST['content']), $_POST['a']);
+				$this->modModel->update_virtual_content(
+                    $this->objSecurity->toInt($_POST['id']),
+                    $this->objSecurity->shield($_POST['virtual_title']),
+                    $this->objSecurity->noJS($_POST['content']),
+                    $_POST['a']
+                );
 				
 				$this->modView->sucessMessage(_SAVING_CONTENT_OK);
 			}
-			$this->modView->edit_virtual_page_view($_id);
+			$this->modView->edit_virtual_page_view($this->id);
 			$this->modView->Render();
 		} catch (Exception $e) {
 			$this->modView->errorMessage(_ADDING_PAGE_ERROR . " " . $e->getMessage());
 			$this->modModel->site_map_model();
-			$this->modView->edit_virtual_page_view($id);
+			$this->modView->edit_virtual_page_view($this->id);
 			$this->modView->Render();	
 		}
 		
@@ -175,7 +183,8 @@ class mod_virtual_page_Controller {
 		
 		try {
 			if(isset($_POST['submit_delete'])) {
-				$this->modModel->delete_page_confirm_model($_POST['id']);
+                $this->id = $this->objSecurity->toInt($_POST['id']);
+				$this->modModel->delete_page_confirm_model($this->id );
 				$this->modView->sucessMessage(_CONTENT_DELETED_OK);
 				$this->modView->site_map_view($this->modModel->rows);
 			} else {
@@ -195,9 +204,7 @@ class mod_virtual_page_Controller {
 	 */
 	
 	public function page_multilang() {
-	
-		$objShield = new Security();
-	
+
 		if(isset($_POST['code'])) {
 	
 			/**
@@ -212,13 +219,22 @@ class mod_virtual_page_Controller {
 				//$this->modView->sucessMessage(_EDIT_MULTI_SUCESS);
 	
 				if(isset($_POST['submit_delete'])) {
-						
-					$this->modModel->delete_page_multilang_confirm_model($_GET['id']);
+
+                    $this->id = $this->objShield->toInt($_GET['id']);
+					$this->modModel->delete_page_multilang_confirm_model($this->id);
 					$this->modView->sucessMessage(_DELETE_SUCESS);
 						
 				} else {
-				
-					$this->modModel->add_page_multilang($_GET['id'], $objShield->shield($title), $objShield->noJS($content), $_POST['a'], $_POST['code'], $_GET['id']);
+
+                    $this->id = $this->objShield->toInt($_GET['id']);
+					$this->modModel->add_page_multilang(
+                        $this->id,
+                        $this->objShield->shield($title),
+                        $this->$objShield->noJS($content),
+                        $_POST['a'],
+                        $_POST['code'],
+                        $this->id
+                    );
 					$this->modView->sucessMessage(_VPADD_MULTI_SUCESS);
 				
 				}
@@ -231,8 +247,9 @@ class mod_virtual_page_Controller {
 			}
 	
 		}
-	
-		$this->modView->edit_virtual_page_view($_GET['id']);
+
+        $this->id = $objShield->toInt($_GET['id']);
+		$this->modView->edit_virtual_page_view($this->id);
 	
 		$this->modView->Render();
 		
