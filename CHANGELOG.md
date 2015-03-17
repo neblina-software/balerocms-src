@@ -4,8 +4,9 @@ CHANGELOG
 
 ==========
 
-    Security Issues
-  * Multiple Vulnerabilities (Zero Science Lab)
+    v.0.8
+  * Security Issues
+  * Multiple Vulnerabilities by Zero Science Lab
 
     v.0.7.2
   * Added SummerNote editor
