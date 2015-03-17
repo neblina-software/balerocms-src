@@ -148,7 +148,8 @@ class admin_View extends configSettings {
 						/**
 						 * Variables
 						 */
-				
+
+                        'core_version' => _CORE_VERSION,
 						'title' => _ADMIN_GLOBAL_SETTINGS,
 				
 						/**
