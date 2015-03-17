@@ -14,65 +14,20 @@
  *
 **/
 
-/**
- * Debug Option
- * Desarrollador / Developer (-1)
- * Usuario / User (0) (default)
- * (Editar)
- */
+error_reporting(0); // Debug - Developer (-1) / User (0)
+define("_CORE_VERSION", "0.8"); // Version
 
-error_reporting(0);
-
-/**
- * Balero CMS Version
- */
-
-define("_CORE_VERSION", "0.7.3");
-
-/**
- * 
- * Para servidores con Windows.
- * (No editar)
- */
-
-$dir = dirname(__FILE__);
+// DO NOT EDIT
+// -----------
+$dir = dirname(__FILE__); // Windows Servers
 $dir = str_replace("\\", "/", $dir);
 
-/**
- *
- * LOCAL_DIR = Directorio dónde se encuentra nuestro sistema.
- * (No editar)
- */
+define("LOCAL_DIR", $dir); // Current dir
+define("APPS_DIR", LOCAL_DIR . "/site/apps/"); // App dir
+define("MODS_DIR", LOCAL_DIR . "/site/apps/admin/mods/"); // Mods dir
 
-define("LOCAL_DIR", $dir);
-
-/**
- * Apps directory
- * (No editar)
- */
-
-define("APPS_DIR", LOCAL_DIR . "/site/apps/");
-
-/**
- * Admin mods directory
- * (No editar)
-*/
-
-define("MODS_DIR", LOCAL_DIR . "/site/apps/admin/mods/");
-
-/**
- * 
- * Cargamos Balero CMS.
- * (No editar)
- */
-
-require_once(LOCAL_DIR . "/core/Router.php");
-
-/**
- * 
- * Hacemos magia.
- * (No editar)
- */
+require_once(LOCAL_DIR . "/core/Router.php"); // Load
 
 $objRouter = new Router();
-$objRouter->init();
+$objRouter->init(); // Do magic
+// -----------

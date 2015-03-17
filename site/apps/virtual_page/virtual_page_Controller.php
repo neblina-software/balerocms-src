@@ -1,11 +1,16 @@
 <?php
 
 /**
-* Plantilla de la clase appController para Balero CMS.
-* Coloque aqui la entrada/salida de datos.
-* Llame desde ésta clase los modelos/vistas 
-* correspondientes de cada controlador.
-**/
+ *
+ * virtual_page_Controller.php
+ * (c) Mar 15, 2015 lastprophet
+ * @author Anibal Gomez (lastprophet)
+ * Balero CMS Open Source
+ * Proyecto %100 mexicano bajo la licencia GNU.
+ * PHP P.O.O. (M.V.C.)
+ * Contacto: anibalgomez@icloud.com
+ *
+ **/
 
 /**
  * Multi-Language Fixes

@@ -1,25 +1,21 @@
 <?php
 
 /**
-* Plantilla de la clase appController para Balero CMS.
-* Coloque aqui la entrada/salida de datos.
-* Llame desde ésta clase los modelos/vistas 
-* correspondientes de cada controlador.
-**/
-
-/**
- * Multi-Language Fixes
- */
-
-/**
- * 
- * @author lastprophet
- * Extends ControllerHandler to multilanguage pages
  *
- */
+ * blog_Controller.php
+ * (c) Mar 15, 2015 lastprophet
+ * @author Anibal Gomez (lastprophet)
+ * Balero CMS Open Source
+ * Proyecto %100 mexicano bajo la licencia GNU.
+ * PHP P.O.O. (M.V.C.)
+ * Contacto: anibalgomez@icloud.com
+ *
+ **/
 
 class blog_Controller extends ControllerHandler {
-	
+
+    private $objSecurity;
+
 	/**
 	* Variables para heredar los métodos de el modelo y la vista.
 	**/
@@ -39,7 +35,8 @@ class blog_Controller extends ControllerHandler {
 	**/
 
 	public function __construct() {
-				
+
+        $this->objSecurity = new Security();
 		try {
 			$this->objModel = new blog_Model();
 			$this->objView = new blog_View();
@@ -147,9 +144,8 @@ class blog_Controller extends ControllerHandler {
 			if(!isset($_GET['app'])) {
 				die(_GET_APP_DONT_EXIST);
 			}
-				
-			$security = new Security();
-			$shield_var = $security->shield($_GET['app']);
+
+			$shield_var = $this->objSecurity->antiXSS($_GET['app']);
 			$class_methods = get_class_methods($shield_var . "_Controller");
 			//var_dump($class_methods);
 	
@@ -252,13 +248,13 @@ class blog_Controller extends ControllerHandler {
 		
 		
 		if(isset($_GET['sr'])) {
-			$this->lang = $_GET['sr']; // get sr has the language
+			$this->lang = $this->objSecurity->antiXSS($_GET['sr']); // get sr has the language
 			$this->objModel->lang = $this->lang;
 			$this->objView->lang = $this->lang;
 			$this->objView->rows = $this->objModel->rows;
 		}
 			
-			$this->objModel->get_fullpost($_GET['id']);
+			$this->objModel->get_fullpost($this->objSecurity->toInt($_GET['id']));
 			$this->objView->rows = $this->objModel->rows;
 			$this->objView->full_post_view($this->objModel->rows);
 			
@@ -276,7 +272,7 @@ class blog_Controller extends ControllerHandler {
 		$langsList = $this->objModel->getLangList();
 		$lang = new Language();
 	
-		$value = $lang->setLang($langsList, $_GET['lang']);
+		$value = $lang->setLang($langsList, $this->objSecurity->antiXSS($_GET['lang']));
 	
 		$this->objModel->setVirtualCookie($_SERVER['REMOTE_ADDR'], $value, $expire);
 	
