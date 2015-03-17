@@ -6,7 +6,6 @@ CHANGELOG
 
     Security Issues
   * Multiple Vulnerabilities (Zero Science Lab)
-  * Security Fix Release At: 1-05-2015
 
     v.0.7.2
   * Added SummerNote editor
