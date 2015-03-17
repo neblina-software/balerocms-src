@@ -12,7 +12,7 @@ define("_NO_RESULTS", "No hay resultados");
 define("_CONTENT_DELETED_OK", "El contenido ha sido eliminado!");
 define("_ADDING_PAGE_ERROR", "Error cuando se intentaba guardar página!");
 define("_ADDED_SUCESSFULLY", "Tu contenido ha sido guardado con éxito! =)");
-define("_ID_DONT_EXIST", "¿Qúe intentas? El ID no existe.");
+define("_ID_DONT_EXIST", "Proteccion De Seguridad. El ID no existe.");
 define("_MARKDOWN_REFERENCE", "Balero CMS's utiliza el lenguaje (MarkDown). Click <a href='http://daringfireball.net/projects/markdown/syntax' target='_blank'> aqui </ a> para ver una referencia y empezar a publicar contenido.");
 define("_SAVING_CONTENT_OK", "El contenido ha sido guardado!");
 define("_ERROR_DELETING_PAGE", "Error cuando se intentaba borrar página virtual.");

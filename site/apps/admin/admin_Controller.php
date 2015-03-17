@@ -1,11 +1,21 @@
 <?php
 
 /**
-* Plantilla de la clase appController para Balero CMS.
-* Coloque aqui la entrada/salida de datos.
-* Llame desde ésta clase los modelos/vistas 
-* correspondientes de cada controlador.
-**/
+ *
+ * admin_Controller.php
+ * (c) Jun 11, 2013 lastprophet
+ * @author Anibal Gomez (lastprophet)
+ * Balero CMS Open Source
+ * Proyecto %100 mexicano bajo la licencia GNU.
+ * PHP P.O.O. (M.V.C.)
+ * Contacto: anibalgomez@icloud.com
+ *
+ * 15-03-2015 Multiple Authenticated Blind SQL Injections
+ * Reported By Gjoko Krstic <gjoko@zeroscience.mk>
+ * Fixed by Anibal Gomez <anibalgomez@icloud.com>
+ *
+ *
+ **/
 
 class admin_Controller {
 	
@@ -22,14 +32,16 @@ class admin_Controller {
 	 */
 	
 	protected $menu;
-	
+
+    private $objSecurity;
 		
 	/**
 	* Los cargamos en el constructor
 	**/
 
 	public function __construct($menu) {
-		
+
+        $this->objSecurity = new Security();
 		$this->menu = $menu;
 		
 		try {
@@ -82,17 +94,17 @@ class admin_Controller {
 			//$this->objModel->save_custom_settings($_POST['themes'], $_POST['url_friendly'], $_POST['pages']);
 			
 			$this->objModel->save_custom_settings(
-								$_POST['themes'], 
-								$_POST['pages'])
-								;
+								$this->objSecurity->antiXSS($_POST['themes']),
+                                $this->objSecurity->antiXSS($_POST['pages'])
+                                );
 				
 			$admcfg = new XMLHandler(LOCAL_DIR . "/site/etc/balero.config.xml");
 		
-			$admcfg->editChild("/config/site/title", $_POST['title']);
-			$admcfg->editChild("/config/site/url", $_POST['url']);
-			$admcfg->editChild("/config/site/description", $_POST['description']);
-			$admcfg->editChild("/config/site/keywords", $_POST['keywords']);
-			$admcfg->editChild("/config/site/editor", $_POST['editors']);
+			$admcfg->editChild("/config/site/title", $this->objSecurity->antiXSS($_POST['title']));
+			$admcfg->editChild("/config/site/url", $this->objSecurity->antiXSS($_POST['url']));
+			$admcfg->editChild("/config/site/description", $this->objSecurity->antiXSS($_POST['description']));
+			$admcfg->editChild("/config/site/keywords", $this->objSecurity->antiXSS($_POST['keywords']));
+			$admcfg->editChild("/config/site/editor", $this->objSecurity->antiXSS($_POST['editors']));
 			
 			/**
 			 * Get refresh view (reloading view)
@@ -124,13 +136,7 @@ class admin_Controller {
 		$this->objModel->test_db_model();
 		
 	}
-	
-	public function prueba() {
-		
-		echo "test";
-		
-	}
-	
+
 	public function get_regs_in_controller($name) {
 		
 		$regs = $this->objModel->get_regs(name);

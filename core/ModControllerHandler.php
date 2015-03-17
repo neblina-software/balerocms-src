@@ -26,9 +26,13 @@
 class ModControllerHandler {
 
 	public $class;
-	
+
+    private $objSecurity;
+
 	public function __construct($var) {
-		
+
+        $this->objSecurity = new Security();
+
 		try {
 		$this->init($var);
 		} catch (Exception $e) {
@@ -55,14 +59,13 @@ class ModControllerHandler {
 			 * Problem with CGI/Fast CGI as PHP Server API Fixed
 			 */
 				
-			$sr = $_GET['sr'];
+			$sr = $this->objSecurity->antiXSS($_GET['sr']);
 			
 			if(!isset($_GET['mod'])) {
 				die();
 			}
-			
-			$security = new Security();
-			$var_shield = $security->shield($_GET['mod']);
+
+			$var_shield = $this->objSecurity->antiXSS($_GET['mod']);
 			$class_methods = get_class_methods("mod_" . $var_shield . "_Controller");
 				
 			foreach ($class_methods as $method_name) {
@@ -73,23 +76,6 @@ class ModControllerHandler {
 				 **/
 	
 				if($sr == $method_name) {
-					
-				/**					
-						($_GET['sr'] != "__construct") && _
-						($_GET['sr'] != "__call") && _
-						($_GET['sr'] != "__callStatic") && _
-						($_GET['sr'] != "__get") && _
-						($_GET['sr'] != "__set") && _
-						($_GET['sr'] != "__isset") && _
-						($_GET['sr'] != "__unset") && _
-						($_GET['sr'] != "__sleep") && _
-						($_GET['sr'] != "__get") && _
-						($_GET['sr'] != "__wakeup") && _
-						($_GET['sr'] != "__toString") && _
-						($_GET['sr'] != "__invoke") && _
-						($_GET['sr'] != "__destruct")) {
-						
-						**/
 	
 					switch($sr) {						
 						// llama staticamente

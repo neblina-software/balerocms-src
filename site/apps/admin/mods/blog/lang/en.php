@@ -18,7 +18,7 @@ define("_WAS_DELETED_OK", "was removed successfully.");
 define("_DELETING_POST_ERROR", "Error while trying deleting post!");
 define("_BLOG_ADDED_SUCESSFULLY", "Your post has been posted sucessfully!");
 define("_SAVED_SUCESSFULLY", "Your post has been saved sucessfully!");
-define("_BLOG__ID_DONT_EXIST", "¿What are you trying? The ID does not exist.");
+define("_BLOG__ID_DONT_EXIST", "Security Protection. The ID does not exist.");
 define("_BLOG_NEW_POST", "New post");
 define("_BLOG_TITLE", "Post title");
 define("_BLOG_MESSAGE", "Message");

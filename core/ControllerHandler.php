@@ -2,7 +2,7 @@
 
 /**
  *
- * ControllerManager.php
+ * ControllerHandler.php
  * (c) May 10, 2013 lastprophet 
  * @author Anibal Gomez (lastprophet)
  * Balero CMS Open Source
@@ -26,9 +26,12 @@
 class ControllerHandler {
 
 	public $class;
+
+    private $objSecurity;
 	
 	public function __construct($var) {
-		
+
+        $this->objSecurity = new Security();
 		$this->init($var);
 	
 	}
@@ -59,8 +62,7 @@ class ControllerHandler {
 			}
 			
 			//$class_methods = get_class_methods("appController");
-			$security = new Security();
-			$shield_var = $security->shield($_GET['app']);
+			$shield_var = $this->objSecurity->antiXSS($_GET['app']);
 			$class_methods = get_class_methods($shield_var . "_Controller");
 			//var_dump($class_methods);
 				
@@ -72,23 +74,7 @@ class ControllerHandler {
 				 */
 	
 				
-				if(($sr == $method_name)) {	
-						
-						/**
- 						//($sr != "__construct") && _
- 						//($sr != "__call") && _
- 						//($sr != "__callStatic") && _
- 						//($sr != "__get") && _
- 						//($sr != "__set") && _
- 						//($sr != "__isset") && _
- 						//($sr != "__unset") && _
- 						//($sr != "__sleep") && _
- 						//($sr != "__get") && _
- 						//($sr != "__wakeup") && _
- 						//($sr != "__toString") && _
- 						//($sr != "__invoke") && _
- 						//($sr != "__destruct")) {
- 						**/
+				if(($sr == $method_name)) {
  						
 					switch($sr) {						
 						// llama staticamente

@@ -80,7 +80,7 @@ class mod_virtual_page_Controller {
 			 */
 			
 			//$plain_text = htmlspecialchars($_POST['content']);
-			$plain_text = $sec->noJS($_POST['content']);
+			$plain_text = $this->objSecurity->antiXSS($_POST['content']);
 			
 			/**
 			 * 
@@ -160,9 +160,9 @@ class mod_virtual_page_Controller {
 				
 				$this->modModel->update_virtual_content(
                     $this->objSecurity->toInt($_POST['id']),
-                    $this->objSecurity->shield($_POST['virtual_title']),
-                    $this->objSecurity->noJS($_POST['content']),
-                    $_POST['a']
+                    $this->objSecurity->antiXSS($_POST['virtual_title']),
+                    $this->objSecurity->antiXSS($_POST['content']),
+                    $this->objSecurity->antiXSS($_POST['a'])
                 );
 				
 				$this->modView->sucessMessage(_SAVING_CONTENT_OK);
@@ -211,8 +211,8 @@ class mod_virtual_page_Controller {
 			 * Add multi-lang pages
 			 */
 	
-			$title = $_POST['virtual_title'];
-			$content = $_POST['virtual_content'];
+			$title = $this->objSecurity->antiXSS($_POST['virtual_title']);
+			$content = $this->objSecurity->antiXSS($_POST['virtual_content']);
 				
 			try {
 				//$this->modModel->edit_post_multilang($_GET['id'], $objShield->shield($title), $objShield->noJS($content));
@@ -229,10 +229,10 @@ class mod_virtual_page_Controller {
                     $this->id = $this->objShield->toInt($_GET['id']);
 					$this->modModel->add_page_multilang(
                         $this->id,
-                        $this->objShield->shield($title),
-                        $this->$objShield->noJS($content),
-                        $_POST['a'],
-                        $_POST['code'],
+                        $this->objSecurity->antiXSS($title),
+                        $this->objSecurity->antiXSS($content),
+                        $this->objSecurity->antiXSS($_POST['a']),
+                        $this->objSecurity->antiXSS($_POST['code']),
                         $this->id
                     );
 					$this->modView->sucessMessage(_VPADD_MULTI_SUCESS);
@@ -248,11 +248,11 @@ class mod_virtual_page_Controller {
 	
 		}
 
-        $this->id = $objShield->toInt($_GET['id']);
+        $this->id = $this->objSecurity->toInt($_GET['id']);
 		$this->modView->edit_virtual_page_view($this->id);
 	
 		$this->modView->Render();
-		
+
 	}
 	
 }

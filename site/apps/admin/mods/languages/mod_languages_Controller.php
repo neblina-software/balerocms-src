@@ -1,20 +1,34 @@
 <?php
 
 /**
- * 
- * @author lastprophet
  *
- */
+ * mod_languages_Controller.php
+ * (c) Jun 11, 2013 lastprophet
+ * @author Anibal Gomez (lastprophet)
+ * Balero CMS Open Source
+ * Proyecto %100 mexicano bajo la licencia GNU.
+ * PHP P.O.O. (M.V.C.)
+ * Contacto: anibalgomez@icloud.com
+ *
+ * 15-03-2015 Multiple Authenticated Blind SQL Injections
+ * Reported By Gjoko Krstic <gjoko@zeroscience.mk>
+ * Fixed by Anibal Gomez <anibalgomez@icloud.com>
+ *
+ *
+ **/
 
-class mod_languages_Controller extends Security {
+class mod_languages_Controller  {
 	
 	public $modModel;
 	public $modView;
-	
+
+    private $objSecurity;
+
 	protected $menu;
 	
 	public function __construct($menu) {
-		
+
+        $this->objSecurity = new Security();
 		$this->menu = $menu;
 		
 		// cargar vista de módulo.
@@ -32,12 +46,6 @@ class mod_languages_Controller extends Security {
 		} catch (Exception $e) {
 			die($e->getMessage());
 		}
-		
-// 		switch ($_GET['sr']) {
-// 			case "prueba":
-// 				echo "funciona";
-// 				break;
-// 		}
 		
 	}
 	
@@ -120,14 +128,12 @@ class mod_languages_Controller extends Security {
 			if(empty($_POST['label'])) {
 				throw new Exception(_ERROR_ADD_LANGUAGE);
 			}
-			
-			$label = $this->shield($_POST['label']);
-			
-			/**
-			 * Anti-TamperData
-			 */
-			
-			$code = $this->shield($_POST['code']);
+
+            /**
+             * Anti-TamperData
+             */
+			$label = $this->objSecurity->antiXSS($_POST['label']);
+			$code = $this->objSecurity->antiXSS($_POST['code']);
 			
 			/**
 			 * Get language list into array
@@ -151,13 +157,13 @@ class mod_languages_Controller extends Security {
 			
 			/**
 			 *
-			 * To do not use PHP header() or Javascript reloading page
-			 * We reload modView class :)
+             * New Reloadable Technique
+             * ------------------------
+			 * To do, do not use PHP header() or Javascript reloading page
+			 * We reload the modView class :)
 			 * That's why Balero is the next generation CMS.
 			 *
 			*/
-				
-			
 			unset($this->modView); // clear view
 			$this->modView = new mod_languages_View();
 			$this->modView->sucessMessage(_SUCESS_ADD_LANGUAGE);
@@ -174,7 +180,7 @@ class mod_languages_Controller extends Security {
 	public function delete_language() {
 		
 		try {
-			$lang = $_POST['lang'];
+			$lang = $this->objSecurity->antiXSS($_POST['lang']);
 			$code = $this->get_lang($lang);
 			$this->modModel->delete_language($code);
 			unset($this->modView); // clear view

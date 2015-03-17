@@ -12,17 +12,17 @@
  *
 **/
 
-//require_once(LOCAL_DIR . "/core/Security.php");
+require_once(LOCAL_DIR . "/core/Security.php");
 require_once(LOCAL_DIR . "/core/boot.php");
 
 class Router {
 	
 	public $local_name;
-	
 	public $message;
-	
 	public $lang;
-	
+
+    private $objSecurity;
+
 	/**
 	 * Public get variable controller
 	 */
@@ -31,7 +31,8 @@ class Router {
 	
 	
 	public function __construct() { 
-			
+
+        $this->objSecurity = new Security();
 		$this->installer();
 		
 	}
@@ -53,9 +54,8 @@ class Router {
 			if(empty($_GET['app'])) {
 				header("Location: index.php");
 			}
-			
-			$security = new Security();
-			$app_get = $security->shield($_GET['app']);
+
+			$app_get = $this->objSecurity->antiXSS($_GET['app']);
 
 			//$sr = $_GET['sr'];
 			
@@ -134,10 +134,18 @@ class Router {
 		$this->lang->app = "admin";
 
 		//echo "cokie: " . base64_decode($_COOKIE['admin_god_balero']);
-		
-		if(isset($_COOKIE['counter']) && $_COOKIE['counter'] >= 5) {
-			die(_LOGIN_ATTEMPS);
-		}
+
+        /**
+         * 15-02-2015 XSS on the cookie 'counter'.
+         * Reported By Gjoko Krstic <gjoko@zeroscience.mk>
+         * Fixed by Anibal Gomez <anibalgomez@icloud.com>
+         */
+		if(isset($_COOKIE['counter'])) {
+            $counter = $this->objSecurity->toInt($_COOKIE['counter']);
+            if($counter >= 5) {
+                die(_LOGIN_ATTEMPS);
+            }
+        }
 		
 		if(!isset($_COOKIE['admin_god_balero'])) {
 			if(isset($_POST['login'])) {
@@ -155,9 +163,9 @@ class Router {
 						setcookie("counter", 1, time()+120);
 					}
 					if(isset($_COOKIE['counter'])) {
-						$value = $_COOKIE['counter'];
-						setcookie("counter", $value+1, time()+120);
-						echo $_COOKIE['counter'];
+						$counter = $this->objSecurity->toInt($_COOKIE['counter']);
+						setcookie("counter", $counter+1, time()+120);
+						echo $counter;
 					}
 					$this->message = _LOGIN_ERROR;
 				}
@@ -251,9 +259,8 @@ class Router {
 		 */
 	
 		if(isset($_GET['mod'])) {
-	
-			$mod_controller_blind = new Security();
-			$blind_url = $mod_controller_blind->shield($_GET['mod']);
+
+			$blind_url = $this->objSecurity->antiXSS($_GET['mod']);
 	
 			switch ($blind_url) {
 	
@@ -413,12 +420,12 @@ class Router {
 	} // end logout
 	
 	/**
-	 * no-cache method's Konqueror fix and other browsers for login page
+	 * no-cache method's Konqueror's fix and other browsers for login page
 	 */
 	
 	public function nocache() {
 		//no  cache headers
-		header("Expires: Mon, 26 Jul 1990 05:00:00 GMT");
+		header("Expires: Mon, 19 April 1987 05:00:00 GMT");
 		header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
 		header("Cache-Control: no-store, no-cache, must-revalidate");
 		header("Cache-Control: post-check=0, pre-check=0", false);

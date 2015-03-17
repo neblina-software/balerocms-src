@@ -12,7 +12,7 @@ define("_NO_RESULTS", "No results");
 define("_CONTENT_DELETED_OK", "The content has been deleted!");
 define("_ADDING_PAGE_ERROR", "Error while trying saving new virtual page!");
 define("_ADDED_SUCESSFULLY", "Your content has been added sucessfully! =)");
-define("_ID_DONT_EXIST", "¿What are you trying? The ID does not exist.");
+define("_ID_DONT_EXIST", "Security Protection. The ID does not exist.");
 define("_MARKDOWN_REFERENCE", "Balero CMS's editor uses lightweight markup language (MarkDown). Click on the <a href='http://daringfireball.net/projects/markdown/syntax' target='_blank'> next </a> link for a reference and start posting content on your page.");
 define("_SAVING_CONTENT_OK", "The content has been saved!");
 define("_ERROR_DELETING_PAGE", "Error while trying deleting virtual page.");
