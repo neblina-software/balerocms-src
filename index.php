@@ -27,7 +27,7 @@ error_reporting(0);
  * Balero CMS Version
  */
 
-define("_CORE_VERSION", "0.7.2");
+define("_CORE_VERSION", "0.7.3");
 
 /**
  * 
