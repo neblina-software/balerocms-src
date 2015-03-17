@@ -21,7 +21,7 @@
  * (Editar)
  */
 
-error_reporting(-1);
+error_reporting(0);
 
 /**
  * Balero CMS Version
