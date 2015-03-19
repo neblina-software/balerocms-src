@@ -67,36 +67,6 @@ class mod_blog_Controller extends configSettings {
 	public function new_post() {
 		
 		if(isset($_POST['submit'])) {
-
-			$post_title = $this->objSecurity->antiXSS($_POST['title']);
-			
-			/**
-			 *
-			 * @$plain_text Obtener el texto plano de el contenido que nos pasa el usuario.
-			 */
-			
-			$plain_text = "";
-			
-			
-			/**
-			 * 
-			 * @function htmlentities() no es compatible con acentos.
-			 */
-			
-			//$plain_text = htmlspecialchars($_POST['content']);
-			$plain_text = $this->objSecurity->antiXSS($_POST['content']);
-			
-			/**
-			 * 
-			 * Llamar la clase Markdown.
-			 */
-			
-			//$render_html = Markdown::defaultTransform($plain_text);
-			
-			//$this->modView->content .= $plain_text;
-			//$this->modView->content .= "----------------------";
-			//$this->modView->content .= $render_html;
-
 			
 			try {
 				if(empty($_POST['content'])) {
@@ -105,8 +75,8 @@ class mod_blog_Controller extends configSettings {
 					$this->modView->errorMessage(_BLOG_POST_EMPTY_TITLE);
 				} else {
 					$this->modModel->add_post(
-                        $post_title,
-                        $plain_text
+                        $this->objSecurity->antiXSS($_POST['title']),
+                        $this->objSecurity->antiXSS($_POST['content'], 1)
                     );
 					$this->modView->sucessMessage(_ADDED_SUCESSFULLY);
 				}
@@ -115,9 +85,7 @@ class mod_blog_Controller extends configSettings {
 			}
 			
 		} // end if
-		
-			//$this->modView->new_post_view();
-			
+
 	}
 			
 
@@ -198,7 +166,7 @@ class mod_blog_Controller extends configSettings {
 				$this->modModel->edit_post(
                     $id,
                     $this->objSecurity->antiXSS($_POST['title']),
-                    $this->objSecurity->antiXSS($_POST['content'])
+                    $this->objSecurity->antiXSS($_POST['content'], 1)
                 );
 				$this->modView->sucessMessage(_SAVED_SUCESSFULLY);
 			}
@@ -265,30 +233,17 @@ class mod_blog_Controller extends configSettings {
 			}
 		}elseif(isset($_POST['code'])) {
 
-			/**
-			 * Add or edit multilang post
-             * Add multi-lang pages
-             */
-		
-			$title = $this->objSecurity->antiXSS($_POST['title']);
-			$content = $this->objSecurity->antiXSS($_POST['content']);
-			
 			try {
-				
-				//$this->modModel->edit_post_multilang($_GET['id'], $objShield->shield($title), $objShield->noJS($content));
-				//$this->modView->sucessMessage(_EDIT_MULTI_SUCESS);
-				
+
 				$this->modModel->add_post_multilang(
                     $this->objSecurity->toInt($_POST['id']),
-                    $this->objSecurity->antiXSS($title),
-                    $this->objSecurity->antiXSS($content),
+                    $this->objSecurity->antiXSS($_POST['title']),
+                    $this->objSecurity->antiXSS($_POST['content'], 1),
                     $this->objSecurity->antiXSS($_POST['code']),
                     $this->objSecurity->toInt($_POST['id'])
                 );
 
 				$this->modView->sucessMessage(_ADD_MULTI_SUCESS);
-				//$this->modView->Render();
-				
 				
 			} catch (Exception $e) {				
 

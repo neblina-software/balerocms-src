@@ -234,7 +234,8 @@ class blog_View extends configSettings {
 	}
 	
 	public function truncate_word($string, $limit) {
-	
+
+        $string = strip_tags($string);
 		if(strlen($string) > $limit) {
 			$truncate_string = substr($string, 0, $limit);
 			$new_string = $truncate_string . "...";

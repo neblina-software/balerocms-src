@@ -72,7 +72,7 @@ class mod_virtual_page_Controller {
 				} else {
 					$this->modModel->add_page_model(
                         $this->objSecurity->antiXSS($_POST['virtual_title']),
-                        $this->objSecurity->antiXSS($_POST['content']),
+                        $this->objSecurity->antiXSS($_POST['content'], 1),
                         $this->objSecurity->toInt($_POST['a'])
                     );
 					$this->modView->sucessMessage(_ADDED_SUCESSFULLY);
@@ -122,7 +122,7 @@ class mod_virtual_page_Controller {
 				throw new Exception(_ID_DONT_EXIST);
 			}
 
-			$id = $this->objSecurity->antiXSS($_GET['id']);
+			$id = $this->objSecurity->toInt($_GET['id']);
 
 			if(isset($_POST['submit'])) {
 
@@ -136,7 +136,7 @@ class mod_virtual_page_Controller {
 				$this->modModel->update_virtual_content(
                     $this->objSecurity->toInt($_POST['id']),
                     $this->objSecurity->antiXSS($_POST['virtual_title']),
-                    $this->objSecurity->antiXSS($_POST['content']),
+                    $this->objSecurity->antiXSS($_POST['content'], 1),
                     $this->objSecurity->toInt($_POST['a'])
                 );
 
@@ -182,9 +182,7 @@ class mod_virtual_page_Controller {
 		if(isset($_POST['code'])) {
 
 			try {
-				//$this->modModel->edit_post_multilang($_GET['id'], $objShield->shield($title), $objShield->noJS($content));
-				//$this->modView->sucessMessage(_EDIT_MULTI_SUCESS);
-	
+
 				if(isset($_POST['submit_delete'])) {
 						
 					$this->modModel->delete_page_multilang_confirm_model(
@@ -197,7 +195,7 @@ class mod_virtual_page_Controller {
 					$this->modModel->add_page_multilang(
                         $this->objSecurity->toInt($_GET['id']),
                         $this->objSecurity->antiXSS($_POST['virtual_title']),
-                        $this->objSecurity->antiXSS($_POST['virtual_content']),
+                        $this->objSecurity->antiXSS($_POST['virtual_content'], 1),
                         $this->objSecurity->toInt($_POST['a']),
                         $this->objSecurity->antiXSS($_POST['code']),
                         $this->objSecurity->toInt($_GET['id'])
