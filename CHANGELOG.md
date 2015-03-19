@@ -5,6 +5,8 @@ CHANGELOG
 ==========
 
     v.0.8
+  * CMS Headers added
+  * Disable Problematic Anti-XSS Chronium
   * Strip tags in intro post
   * Image editor fix (Anti-XSS Filter)
   * Security Issues

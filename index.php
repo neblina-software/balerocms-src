@@ -27,7 +27,10 @@ define("APPS_DIR", LOCAL_DIR . "/site/apps/"); // App dir
 define("MODS_DIR", LOCAL_DIR . "/site/apps/admin/mods/"); // Mods dir
 
 require_once(LOCAL_DIR . "/core/Router.php"); // Load
+require_once(LOCAL_DIR . "/core/CMSHeaders.php");
 
+$objHeaders = new CMSHeaders();
 $objRouter = new Router();
+$objHeaders->cmsHeaders();
 $objRouter->init(); // Do magic
 // -----------
