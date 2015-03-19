@@ -26,16 +26,23 @@ class Security {
 	
 	private $var;
 
+    /**
+     * Anti-XSS Method
+     * @param $val
+     * @return mixed
+     */
     public function antiXSS($val) {
 
-        $val = str_replace('/([\x00-\x08,\x0b-\x0c,\x0e-\x19])/', '<y>', $val);
+        $val = preg_replace("/<(.*)s(.*)c(.*)r(.*)i(.*)p(.*)t(.*)>(.*)/i", "<xss-tag-detected>", $val);
+        $val = preg_replace('/([\x00-\x08,\x0b-\x0c,\x0e-\x19])/', '<xss-code-detected>', $val);
+        $val = str_replace('\'', '\&#39;', $val);
 
         $search = '[a-zA-Z0-9]';
         $search .= '!@#$%^&*()';
         $search .= '~`";:?+/={}[]-\\_|\'';
         for ($i = 0; $i < strlen($search); $i++) {
-            $val = str_replace('/(&#[xX]0{0,8}'.dechex(ord($search[$i])).';?)/i', $search[$i], $val); // with a ;
-            $val = str_replace('/(&#0{0,8}'.ord($search[$i]).';?)/', $search[$i], $val); // with a ;
+            $val = preg_replace('/(&#[xX]0{0,8}'.dechex(ord($search[$i])).';?)/i', $search[$i], $val); // with a ;
+            $val = preg_replace('/(&#0{0,8}'.ord($search[$i]).';?)/', $search[$i], $val); // with a ;
         }
         $ra1 = Array('javascript', 'vbscript', 'expression', 'applet', 'meta', 'xml', 'blink', 'link', 'script', 'embed', 'object', 'iframe', 'frame', 'frameset', 'ilayer', 'layer', 'bgsound', 'title', 'base');
         $ra2 = Array('onabort', 'onactivate', 'onafterprint', 'onafterupdate', 'onbeforeactivate', 'onbeforecopy', 'onbeforecut', 'onbeforedeactivate', 'onbeforeeditfocus', 'onbeforepaste', 'onbeforeprint', 'onbeforeunload', 'onbeforeupdate', 'onblur', 'onbounce', 'oncellchange', 'onchange', 'onclick', 'oncontextmenu', 'oncontrolselect', 'oncopy', 'oncut', 'ondataavailable', 'ondatasetchanged', 'ondatasetcomplete', 'ondblclick', 'ondeactivate', 'ondrag', 'ondragend', 'ondragenter', 'ondragleave', 'ondragover', 'ondragstart', 'ondrop', 'onerror', 'onerrorupdate', 'onfilterchange', 'onfinish', 'onfocus', 'onfocusin', 'onfocusout', 'onhelp', 'onkeydown', 'onkeypress', 'onkeyup', 'onlayoutcomplete', 'onload', 'onlosecapture', 'onmousedown', 'onmouseenter', 'onmouseleave', 'onmousemove', 'onmouseout', 'onmouseover', 'onmouseup', 'onmousewheel', 'onmove', 'onmoveend', 'onmovestart', 'onpaste', 'onpropertychange', 'onreadystatechange', 'onreset', 'onresize', 'onresizeend', 'onresizestart', 'onrowenter', 'onrowexit', 'onrowsdelete', 'onrowsinserted', 'onscroll', 'onselect', 'onselectionchange', 'onselectstart', 'onstart', 'onstop', 'onsubmit', 'onunload');
@@ -58,13 +65,12 @@ class Security {
                 }
                 $pattern .= '/i';
                 $replacement = substr($ra[$i], 0, 2).'<x>'.substr($ra[$i], 2);
-                $val = str_replace($pattern, $replacement, $val);
+                $val = preg_replace($pattern, $replacement, $val);
                 if ($val_before == $val) {
                     $found = false;
                 }
             }
         }
-        $val = str_replace("\\", "<x>", $val);
         return $val;
     }
 

@@ -241,7 +241,15 @@ class mod_virtual_page_Model extends configSettings {
 	}
 	
 	public function update_virtual_content($id, $title, $content, $active) {
-		$this->db->query("UPDATE virtual_page SET virtual_title = '$title', virtual_content = '$content', active = '$active' WHERE id = '$id'");	
+        try {
+            $update = "UPDATE virtual_page
+                        SET virtual_title = '" . $title . "',
+                        virtual_content = '" . $content . "',
+                        active = '" . $active . "' WHERE id = '" . $id . "'";
+            $this->db->query($update);
+        } catch(Exception $e) {
+           throw new Exception("252: mod_virtual_page_Model: " . $e->getMessage());
+        }
 	}
 	
 	public function add_page_multilang($id, $title, $message, $active, $code, $id) {

@@ -10,21 +10,21 @@
  * PHP P.O.O. (M.V.C.)
  * Contacto: anibalgomez@icloud.com
  * 
- * Security Fix: 15-03-2015
+ * UPDATED: 20-04-2014
  *
 **/
 
 class mod_virtual_page_Controller {
-	
+
+    private $objSecurity;
+
 	public $modModel;
 	public $modView;
-
-    private $id;
-    private $objSecurity;
 	
 	public function __construct($menu) {
-
-        $this->objSecurity = new Security();
+		
+		$this->objSecurity = new Security();
+        //echo "Testeandop: " . $this->objSecurity->antiXSS("<script>alert(document.cookie)</script>&#39;");
 
 		// cargar vista de módulo.
 		try {
@@ -63,43 +63,18 @@ class mod_virtual_page_Controller {
 	public function new_page() {
 		
 		if(isset($_POST['submit'])) {
-			
-			$sec = new Security();
-			
-			/**
-			 *
-			 * @$plain_text Obtener el texto plano de el contenido que nos pasa el usuario.
-			 */
-			
-			$plain_text = "";
-			
-			
-			/**
-			 * 
-			 * @function htmlentities() no es compatible con acentos.
-			 */
-			
-			//$plain_text = htmlspecialchars($_POST['content']);
-			$plain_text = $this->objSecurity->antiXSS($_POST['content']);
-			
-			/**
-			 * 
-			 * Llamar la clase Markdown.
-			 */
-			
-			//$render_html = Markdown::defaultTransform($plain_text);
-			
-			//$this->modView->content .= $plain_text;
-			//$this->modView->content .= "----------------------";
-			//$this->modView->content .= $render_html;
-			
+
 			try {
 				if(empty($_POST['content'])) {
 					$this->modView->errorMessage(_PAGE_POST_ERROR);
 				}elseif(empty($_POST['virtual_title'])) {
 					$this->modView->errorMessage(_PAGE_POST_EMPTY_TITLE);
 				} else {
-					$this->modModel->add_page_model($sec->shield($_POST['virtual_title']), $plain_text, $_POST['a']);
+					$this->modModel->add_page_model(
+                        $this->objSecurity->antiXSS($_POST['virtual_title']),
+                        $this->objSecurity->antiXSS($_POST['content']),
+                        $this->objSecurity->toInt($_POST['a'])
+                    );
 					$this->modView->sucessMessage(_ADDED_SUCESSFULLY);
 				}
 			} catch (Exception $e) {
@@ -131,51 +106,51 @@ class mod_virtual_page_Controller {
 	}
 	
 	public function edit_page() {
-				
+
 		try {
-			
+
 			if(isset($_POST['submit_delete'])) {
 				$this->delete_page_confirm();
 				die();
 			}
-			
+
 			if(empty($_GET['id'])) {
 				throw new Exception(_NO_RESULTS);
 			}
-				
+
 			if(!isset($_GET['id'])) {
 				throw new Exception(_ID_DONT_EXIST);
 			}
 
-			$this->id = $this->objSecurity->toInt($_GET['id']);
+			$id = $this->objSecurity->antiXSS($_GET['id']);
 
 			if(isset($_POST['submit'])) {
-				
+
 				if(empty($_POST['content'])) {
 					throw new Exception(_PAGE_POST_ERROR);
 				}
 				if(empty($_POST['virtual_title'])) {
 					throw new Exception(_PAGE_POST_EMPTY_TITLE);
 				}
-				
+
 				$this->modModel->update_virtual_content(
                     $this->objSecurity->toInt($_POST['id']),
                     $this->objSecurity->antiXSS($_POST['virtual_title']),
                     $this->objSecurity->antiXSS($_POST['content']),
-                    $this->objSecurity->antiXSS($_POST['a'])
+                    $this->objSecurity->toInt($_POST['a'])
                 );
-				
+
 				$this->modView->sucessMessage(_SAVING_CONTENT_OK);
 			}
-			$this->modView->edit_virtual_page_view($this->id);
+			$this->modView->edit_virtual_page_view($id);
 			$this->modView->Render();
 		} catch (Exception $e) {
 			$this->modView->errorMessage(_ADDING_PAGE_ERROR . " " . $e->getMessage());
 			$this->modModel->site_map_model();
-			$this->modView->edit_virtual_page_view($this->id);
-			$this->modView->Render();	
+			$this->modView->edit_virtual_page_view($id);
+			$this->modView->Render();
 		}
-		
+
 	}
 	
 	
@@ -183,8 +158,7 @@ class mod_virtual_page_Controller {
 		
 		try {
 			if(isset($_POST['submit_delete'])) {
-                $this->id = $this->objSecurity->toInt($_POST['id']);
-				$this->modModel->delete_page_confirm_model($this->id );
+				$this->modModel->delete_page_confirm_model($_POST['id']);
 				$this->modView->sucessMessage(_CONTENT_DELETED_OK);
 				$this->modView->site_map_view($this->modModel->rows);
 			} else {
@@ -206,34 +180,27 @@ class mod_virtual_page_Controller {
 	public function page_multilang() {
 
 		if(isset($_POST['code'])) {
-	
-			/**
-			 * Add multi-lang pages
-			 */
-	
-			$title = $this->objSecurity->antiXSS($_POST['virtual_title']);
-			$content = $this->objSecurity->antiXSS($_POST['virtual_content']);
-				
+
 			try {
 				//$this->modModel->edit_post_multilang($_GET['id'], $objShield->shield($title), $objShield->noJS($content));
 				//$this->modView->sucessMessage(_EDIT_MULTI_SUCESS);
 	
 				if(isset($_POST['submit_delete'])) {
-
-                    $this->id = $this->objShield->toInt($_GET['id']);
-					$this->modModel->delete_page_multilang_confirm_model($this->id);
+						
+					$this->modModel->delete_page_multilang_confirm_model(
+                        $this->objSecurity->toInt($_GET['id'])
+                    );
 					$this->modView->sucessMessage(_DELETE_SUCESS);
 						
 				} else {
-
-                    $this->id = $this->objShield->toInt($_GET['id']);
+				
 					$this->modModel->add_page_multilang(
-                        $this->id,
-                        $this->objSecurity->antiXSS($title),
-                        $this->objSecurity->antiXSS($content),
-                        $this->objSecurity->antiXSS($_POST['a']),
+                        $this->objSecurity->toInt($_GET['id']),
+                        $this->objSecurity->antiXSS($_POST['virtual_title']),
+                        $this->objSecurity->antiXSS($_POST['virtual_content']),
+                        $this->objSecurity->toInt($_POST['a']),
                         $this->objSecurity->antiXSS($_POST['code']),
-                        $this->id
+                        $this->objSecurity->toInt($_GET['id'])
                     );
 					$this->modView->sucessMessage(_VPADD_MULTI_SUCESS);
 				
@@ -247,12 +214,13 @@ class mod_virtual_page_Controller {
 			}
 	
 		}
-
-        $this->id = $this->objSecurity->toInt($_GET['id']);
-		$this->modView->edit_virtual_page_view($this->id);
+	
+		$this->modView->edit_virtual_page_view(
+            $this->objSecurity->toInt($_GET['id'])
+        );
 	
 		$this->modView->Render();
-
+		
 	}
 	
 }

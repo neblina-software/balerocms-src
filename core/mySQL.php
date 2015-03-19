@@ -126,7 +126,7 @@ class mySQL {
 		$this->result = $this->conn->query($query);
 		
 			if(!$this->result) {
-				throw new Exception();
+				throw new Exception("MYSQL: SYNTAX QUERY ERROR: " . $query);
 			}
 			
 		} catch(Exception $e) {
