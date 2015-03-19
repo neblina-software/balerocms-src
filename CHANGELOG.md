@@ -5,8 +5,12 @@ CHANGELOG
 ==========
 
     v.0.8
+  * Strip tags in intro post
+  * Image editor fix (Anti-XSS Filter)
   * Security Issues
   * Multiple Vulnerabilities by Zero Science Lab
+  * Core version checker
+  * Other minor bugs fixed
 
     v.0.7.2
   * Added SummerNote editor
