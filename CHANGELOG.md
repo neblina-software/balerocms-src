@@ -4,7 +4,10 @@ CHANGELOG
 
 ==========
 
-    v.0.8
+    v.0.8.1
+  * Unit Test Support (/test/)
+  * Public Folder
+  * Image Uploader
   * CMS Headers added
   * Disable Problematic Anti-XSS Chronium
   * Strip tags in intro post
