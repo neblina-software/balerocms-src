@@ -22,8 +22,6 @@ IndexIgnore *
 
 # Excludes
 
-RewriteRule test test/index.php
-
 # Add slash / to get parameters app, subroutine or page-or-id
 
 RewriteRule ^([a-zA-Z0-9_-]+)$ $1/

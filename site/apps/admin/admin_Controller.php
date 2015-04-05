@@ -133,6 +133,20 @@ class admin_Controller {
 
 	}
 
+    public function uploader() {
+        try {
+            if(!isset($_FILES['file'])) {
+                die("input file not exist");
+            }
+            $uploader = new Uploader();
+            echo $uploader->image(
+                $_FILES['file'],
+                LOCAL_DIR);
+        } catch(Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
 	public function test_db() {
 		
 		$this->objModel->test_db_model();
