@@ -5,10 +5,6 @@ Balero CMS
 
 [http://docs.balerocms.com/](http://docs.balerocms.com/)
 
-* Referencia de API:
-
-[http://api.balerocms.com/](http://api.balerocms.com/)
-
 ===========
 Información
 ===========
@@ -17,9 +13,7 @@ Balero CMS es un proyecto 100% mexicano para la gestión de contenido
 web y totalmente de código abierto. El nombre de Balero hace referencia a
 un juguete antigüo y representativo de México.
 
-Si deseas colaborar con el código visita:
-
-[http://developer.balerocms.com/](http://developer.balerocms.com/)
+Si deseas colaborar con el código la pagina de github.
 
 No olvides apoyar el software nacional.
 

@@ -5,14 +5,6 @@ Balero CMS
 
 [http://docs.balerocms.com/](http://docs.balerocms.com/)
 
-* API Documentation:
-
-[http://api.balerocms.com/](http://api.balerocms.com/)
-
-Features in next versions
-
-  * Uploading and resizing image class
-
 ==========
 
 CHANGELOG
