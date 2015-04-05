@@ -4,10 +4,11 @@ CHANGELOG
 
 ==========
 
-    v.0.8.1
+    v.0.8.2
+  * Editor Fixes
   * Unit Test Support (/test/)
   * Public Folder
-  * Image Uploader
+  * Image Uploader Unit Test
   * CMS Headers added
   * Disable Problematic Anti-XSS Chronium
   * Strip tags in intro post

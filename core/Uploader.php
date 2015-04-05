@@ -1,10 +1,15 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Anibal Gomez
- * Date: 25/03/15
- * Time: 8:56
- */
+ *
+ * Uploader.php
+ * (c) Mar 25, 2015 lastprophet
+ * @author Anibal Gomez (lastprophet)
+ * Balero CMS Open Source
+ * Proyecto %100 mexicano bajo la licencia GNU.
+ * PHP P.O.O. (M.V.C.)
+ * Contacto: anibalgomez@icloud.com
+ *
+ **/
 
 class Uploader {
 
@@ -29,6 +34,12 @@ class Uploader {
                 the following error:  " . $file['error']);
             }
         }
+        return $this->getBasepath() . "public/images/" . $filename;
+    }
+
+    public function getBasepath() {
+        $config = simplexml_load_file("../site/etc/balero.config.xml");
+        return $config->site[0]->basepath;
     }
 
 }

@@ -13,9 +13,7 @@ class ImageUploader {
     public function init($file) {
         try {
             $uploader = new Uploader();
-            $uploader->image($file);
-            echo "Creating image /uploads/images/" .
-                $file['name'] . " Sucess!";
+            echo $uploader->image($file);
         } catch(Exception $e) {
             echo "Error: " . $e->getMessage();
         }

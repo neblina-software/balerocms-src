@@ -473,7 +473,7 @@
         "html": false,
         "link": true,
         "image": true,
-        "video": true,
+        "video": false,
         events: {},
         parserRules: {
             classes: {

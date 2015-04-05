@@ -5,7 +5,7 @@
  */
 
 // Image Uploader Test
-echo "Running ImageUploader Test...";
+//echo "Running ImageUploader Test...";
 if(isset($_FILES['file'])) {
     require_once("./uploader/ImageUploader.php");
     $uploaderTest = new ImageUploader();

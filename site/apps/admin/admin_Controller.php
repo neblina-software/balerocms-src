@@ -34,6 +34,8 @@ class admin_Controller {
 	protected $menu;
 
     private $objSecurity;
+
+    private $msg;
 		
 	/**
 	* Los cargamos en el constructor
@@ -130,7 +132,7 @@ class admin_Controller {
 		$this->objView->settings_view();
 
 	}
-	
+
 	public function test_db() {
 		
 		$this->objModel->test_db_model();

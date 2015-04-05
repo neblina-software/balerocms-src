@@ -89,15 +89,36 @@
                             </div>
                         </div>
                         <!-- /edit multi-lang page -->
-                        
+
                         <!-- summernote javascript -->
                         <script type="text/javascript">
-						$(document).ready(function() {
-						  $('.summernote').summernote({height: 350, codemirror: {
-						    theme: ''}
-						  });
-						});
-						var postForm = function() {
-						  var content = $('textarea[name="content"]').html($('.summernote').code());
-						}
-						</script>
+                            $(document).ready(function() {
+                                $('.summernote').summernote({
+                                    height: 350,
+                                    onImageUpload: function(files, editor, welEditable) {
+                                        sendFile(files[0], editor, welEditable);
+                                    },
+                                    codemirror: {
+                                        theme: ''
+                                    }
+                                });
+                                function sendFile(file, editor, welEditable) {
+                                    data = new FormData();
+                                    data.append("file", file);
+                                    $.ajax({
+                                        data: data,
+                                        type: "POST",
+                                        url: "{basepath}test/uploader/test.php",
+                                        cache: false,
+                                        contentType: false,
+                                        processData: false,
+                                        success: function(url) {
+                                            editor.insertImage(welEditable, url);
+                                        }
+                                    });
+                                }
+                            });
+                            var postForm = function() {
+                                var content = $('textarea[name="content"]').html($('.summernote').code());
+                            }
+                        </script>

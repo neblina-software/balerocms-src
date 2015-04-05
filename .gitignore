@@ -6,6 +6,7 @@
 ./site/etc/balero.config.xml
 /site/etc/balero.config.xml
 site/etc/balero.config.xml
+public/images
 .DS_Store
 .idea
 *.iml
